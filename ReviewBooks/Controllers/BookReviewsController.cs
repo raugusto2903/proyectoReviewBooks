@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -75,6 +76,9 @@ namespace ReviewBooks.Controllers
         // GET: BookReviews/Create
         public IActionResult Create()
         {
+            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Esto obtiene el ID del usuario logueado
+            //ViewBag.UserId = userId;
+
             ViewData["BookId"] = new SelectList(_context.Book, "Id", "Id");
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();

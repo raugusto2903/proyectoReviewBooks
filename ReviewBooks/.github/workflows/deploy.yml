@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for .NET Core 8
+name: CI/CD Pipeline for .NET Core 8 with Docker
 
 on:
   push:
@@ -14,34 +14,26 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # 2. Instalar .NET Core SDK
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 8.x  # Usa la versión 8.x de .NET Core
+      # 2. Build Docker image
+      - name: Build Docker Image
+        run: docker build -t myapp:latest .
 
-      # 3. Restaurar dependencias del proyecto
-      - name: Restore Dependencies
-        run: dotnet restore
+      # 3. Login to Render (Docker registry credentials)
+      - name: Login to Render Docker Registry
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          echo $RENDER_API_KEY | docker login registry.render.com -u render --password-stdin
 
-      # 4. Construir el proyecto
-      - name: Build Project
-        run: dotnet build --configuration Release --no-restore
+      # 4. Push Docker image to Render's registry
+      - name: Push Docker Image
+        run: docker push registry.render.com/your-service-id/myapp:latest
 
-      # 5. Ejecutar las pruebas (opcional)
-      - name: Run Tests
-        run: dotnet test --no-restore --verbosity normal
-
-      # 6. Publicar la aplicación en una carpeta temporal
-      - name: Publish Project
-        run: dotnet publish -c Release -o ./publish
-
-      # 7. Desplegar en Render utilizando el CLI de Render
+      # 5. Deploy using Render CLI
       - name: Deploy to Render
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
         run: |
           curl -f https://cli.render.com/releases/v0.1.9/cli-linux-amd64 -o render
           chmod +x render
-          ./render deploy --service <YOUR_SERVICE_ID> --path ./publish
-
+          ./render deploy --service <YOUR_SERVICE_ID>

@@ -10,6 +10,11 @@ namespace ReviewBooks
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.WebHost.UseUrls("http://0.0.0.0:80");
+            var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+            
+
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options => { options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")); });
@@ -17,7 +22,7 @@ namespace ReviewBooks
                 options.SignIn.RequireConfirmedAccount = true;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
             var app = builder.Build();
-
+           
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -45,8 +50,9 @@ namespace ReviewBooks
             //    context.Response.Redirect("");
             //    return Task.CompletedTask;
             //});
-
+            app.Urls.Add($"http://0.0.0.0:{port}");
             app.Run();
+
         }
     }
 }

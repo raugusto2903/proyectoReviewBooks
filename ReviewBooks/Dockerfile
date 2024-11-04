@@ -14,9 +14,10 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
+ENV ASPNETCORE_URLS=http://+:8080
 
 # Exponer el puerto en el contenedor
 EXPOSE 80
 
 # Comando para iniciar la aplicación
-ENTRYPOINT ["dotnet", "TuProyecto.dll"]
+ENTRYPOINT ["dotnet", "ReviewBooks.dll"]
