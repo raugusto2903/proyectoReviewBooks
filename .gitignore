@@ -1,1 +1,62 @@
+# Configuraciones de Visual Studio
 .vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Carpetas de compilación de .NET
+bin/
+obj/
+out/
+
+# Archivos de configuración de Visual Studio Code
+.vscode/
+
+# Archivos de paquetes NuGet
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Archivos de caché de dependencias
+packages/
+.nuget/
+*.snupkg
+
+# Configuración de depuración de la aplicación
+*.log
+*.pdb
+*.cache
+*.ide
+.idea/
+
+# Archivos temporales
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Archivos de configuración local
+appsettings.Local.json
+appsettings.Development.json
+
+# Carpetas de pruebas locales
+TestResults/
+
+# Archivos de Docker (si utilizas Docker para pruebas locales)
+docker-compose.override.yml
+
+# Archivos de entorno (si usas variables de entorno locales)
+.env
+.env.local
+.env.*.local
+
+# Archivos de publicación
+publish/
+wwwroot/
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
