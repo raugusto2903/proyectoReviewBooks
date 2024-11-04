@@ -1,1 +1,47 @@
+name: CI/CD Pipeline for .NET Core 8
+
+on:
+  push:
+    branches:
+      - main  # Ejecuta el pipeline cuando hay cambios en la rama 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código fuente
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 2. Instalar .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.x  # Usa la versión 8.x de .NET Core
+
+      # 3. Restaurar dependencias del proyecto
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      # 4. Construir el proyecto
+      - name: Build Project
+        run: dotnet build --configuration Release --no-restore
+
+      # 5. Ejecutar las pruebas (opcional)
+      - name: Run Tests
+        run: dotnet test --no-restore --verbosity normal
+
+      # 6. Publicar la aplicación en una carpeta temporal
+      - name: Publish Project
+        run: dotnet publish -c Release -o ./publish
+
+      # 7. Desplegar en Render utilizando el CLI de Render
+      - name: Deploy to Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          curl -f https://cli.render.com/releases/v0.1.9/cli-linux-amd64 -o render
+          chmod +x render
+          ./render deploy --service <YOUR_SERVICE_ID> --path ./publish
 
