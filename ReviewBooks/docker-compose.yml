@@ -1,0 +1,20 @@
+﻿version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: system
+      POSTGRES_DB: ReviewBooks
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=35.193.79.143;Database=postgres;Username=postgres;Password=system;Port=5432"
+    depends_on:
+      - db
