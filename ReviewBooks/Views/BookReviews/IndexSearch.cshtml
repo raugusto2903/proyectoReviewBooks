@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ReviewBooks.Models.BookReview>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Search</h1>
+
+
+
+<!-- Formulario de búsqueda -->
+<form method="get" asp-action="IndexSearch">
+    <div class="form-group">
+        <label for="Author">Author</label>
+        <input type="text" name="author" class="form-control" id="Author" />
+    </div>
+    <div class="form-group">
+        <label for="Genre">Genre</label>
+        <input type="text" name="genre" class="form-control" id="Genre" />
+    </div>
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" name="title" class="form-control" id="Title" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ReviewText)</th>
+            <th>@Html.DisplayNameFor(model => model.ReviewDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Book.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Book.Author)</th>
+            <th>@Html.DisplayNameFor(model => model.User.Email)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ReviewText)</td>
+                <td>@Html.DisplayFor(modelItem => item.ReviewDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Book.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Book.Author)</td>
+                <td>@Html.DisplayFor(modelItem => item.User.Email)</td>
+            </tr>
+        }
+    </tbody>
+</table>

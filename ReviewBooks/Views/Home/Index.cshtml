@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To ReviewBooks</h1>
+    @* <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
+    <div class="d-flex">
+        @if (User.Identity.IsAuthenticated)
+                        {
+        <!-- Enlace a la vista Index de Books -->
+        <a class="nav-link" asp-controller="Books" asp-action="Index">Books</a>
+
+        <!-- Enlace a la vista Index de ReviewBooks -->
+        <a class="nav-link" asp-controller="BookReviews" asp-action="Index">Reviews</a>
+                        }
+    </div>
+</div>
