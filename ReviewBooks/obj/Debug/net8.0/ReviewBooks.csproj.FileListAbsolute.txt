@@ -297,3 +297,8 @@ D:\source\Repo\ReviewBooks\ReviewBooks\bin\Debug\net8.0\out\appsettings.Developm
 D:\source\Repo\ReviewBooks\ReviewBooks\bin\Debug\net8.0\out\appsettings.json
 D:\source\Repo\ReviewBooks\ReviewBooks\bin\Debug\net8.0\out\ReviewBooks.deps.json
 D:\source\Repo\ReviewBooks\ReviewBooks\bin\Debug\net8.0\out\ReviewBooks.runtimeconfig.json
+D:\source\Repo\ReviewBooks\ReviewBooks\bin\Debug\net8.0\out\out\web.config
+D:\source\Repo\ReviewBooks\ReviewBooks\bin\Debug\net8.0\out\out\appsettings.Development.json
+D:\source\Repo\ReviewBooks\ReviewBooks\bin\Debug\net8.0\out\out\appsettings.json
+D:\source\Repo\ReviewBooks\ReviewBooks\bin\Debug\net8.0\out\out\ReviewBooks.deps.json
+D:\source\Repo\ReviewBooks\ReviewBooks\bin\Debug\net8.0\out\out\ReviewBooks.runtimeconfig.json
